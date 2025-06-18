@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Bienvenido a Biwak</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f4;
+      text-align: center;
+      padding: 50px;
+    }
+    #container {
+      background-color: #fff;
+      padding: 30px;
+      border-radius: 8px;
+      box-shadow: 0 0 20px rgba(0,0,0,0.1);
+      display: inline-block;
+    }
+    input[type="text"] {
+      padding: 10px;
+      font-size: 16px;
+      width: 200px;
+      margin-bottom: 20px;
+    }
+    button {
+      background-color: #2bb673;
+      color: white;
+      border: none;
+      padding: 12px 25px;
+      font-size: 16px;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    button:disabled {
+      background-color: #ccc;
+      cursor: not-allowed;
+    }
+  </style>
+</head>
+<body>
+  <div id="container">
+    <h2>¡Bienvenido a Biwak Climbing!</h2>
+    <p>Antes de continuar, por favor introduce tu <strong>código postal</strong>.</p>
+
+    <form id="formulario">
+      <input type="text" id="codigoPostal" name="codigoPostal" placeholder="Ej: 48001" required />
+      <br>
+      <button type="submit" id="continuar" disabled>Continuar a Internet</button>
+    </form>
+  </div>
+
+  <script>
+    const input = document.getElementById("codigoPostal");
+    const button = document.getElementById("continuar");
+
+    input.addEventListener("input", () => {
+      button.disabled = input.value.trim() === "";
+    });
+
+    document.getElementById("formulario").addEventListener("submit", function(e) {
+      e.preventDefault();
+      // Aquí puedes enviar el dato al backend si lo implementas en el futuro
+      // window.location.href = "https://tu-backend-autorizador.com?mac=...";
+
+      // Por ahora solo simula redirección
+      window.location.href = "http://example.com"; // Cámbialo por meraki.com u otra URL si quieres
+    });
+  </script>
+</body>
+</html>
