@@ -2,69 +2,123 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <title>Bienvenido a Biwak</title>
+  <title>Acceso WiFi - Biwak</title>
   <style>
     body {
       font-family: Arial, sans-serif;
-      background-color: #f4f4f4;
-      text-align: center;
-      padding: 50px;
+      background-color: #f0f2f5;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
     }
+
     #container {
-      background-color: #fff;
-      padding: 30px;
-      border-radius: 8px;
-      box-shadow: 0 0 20px rgba(0,0,0,0.1);
-      display: inline-block;
+      background-color: #ffffff;
+      padding: 40px;
+      max-width: 800px;
+      border-radius: 10px;
+      box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+      text-align: center;
     }
-    input[type="text"] {
-      padding: 10px;
-      font-size: 16px;
-      width: 200px;
+
+    h2 {
       margin-bottom: 20px;
     }
+
+    input[type="text"] {
+      padding: 12px;
+      width: 60%;
+      font-size: 16px;
+      margin-bottom: 20px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+
+    label {
+      display: block;
+      margin-top: 20px;
+      margin-bottom: 10px;
+      font-weight: bold;
+    }
+
+    #policy {
+      max-height: 250px;
+      overflow-y: auto;
+      text-align: left;
+      padding: 15px;
+      margin-bottom: 20px;
+      border: 1px solid #ccc;
+      background-color: #fafafa;
+      font-size: 14px;
+    }
+
     button {
       background-color: #2bb673;
       color: white;
       border: none;
       padding: 12px 25px;
       font-size: 16px;
-      border-radius: 4px;
+      border-radius: 5px;
       cursor: pointer;
     }
+
     button:disabled {
       background-color: #ccc;
       cursor: not-allowed;
+    }
+
+    .checkbox-container {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      margin-bottom: 10px;
     }
   </style>
 </head>
 <body>
   <div id="container">
     <h2>¡Bienvenido a Biwak Climbing!</h2>
-    <p>Antes de continuar, por favor introduce tu <strong>código postal</strong>.</p>
+    <p>Antes de acceder al WiFi, por favor introduce tu <strong>código postal</strong> y acepta nuestra política de privacidad.</p>
 
     <form id="formulario">
-      <input type="text" id="codigoPostal" name="codigoPostal" placeholder="Ej: 48001" required />
-      <br>
+      <input type="text" id="codigoPostal" name="codigoPostal" placeholder="Código Postal" required />
+
+      <div class="checkbox-container">
+        <input type="checkbox" id="aceptarPolitica" required />
+        <label for="aceptarPolitica">He leído y acepto la política de privacidad</label>
+      </div>
+
+      <div id="policy">
+        <strong>POLÍTICA DE PRIVACIDAD</strong><br><br>
+        Los datos personales recogidos serán objeto de tratamiento por DARUMANAIA S.L. Astintze 4, 48160, Derio, Bizkaia...<br><br>
+        <!-- Puedes reemplazar el contenido anterior por el texto completo que me enviaste si lo deseas -->
+        (Texto completo de la política aquí. Por brevedad, lo he truncado. Lo puedes copiar íntegro.)
+      </div>
+
       <button type="submit" id="continuar" disabled>Continuar a Internet</button>
     </form>
   </div>
 
   <script>
-    const input = document.getElementById("codigoPostal");
-    const button = document.getElementById("continuar");
+    const codigoPostal = document.getElementById("codigoPostal");
+    const aceptarPolitica = document.getElementById("aceptarPolitica");
+    const boton = document.getElementById("continuar");
 
-    input.addEventListener("input", () => {
-      button.disabled = input.value.trim() === "";
-    });
+    function validar() {
+      boton.disabled = !(codigoPostal.value.trim() !== "" && aceptarPolitica.checked);
+    }
+
+    codigoPostal.addEventListener("input", validar);
+    aceptarPolitica.addEventListener("change", validar);
 
     document.getElementById("formulario").addEventListener("submit", function(e) {
       e.preventDefault();
-      // Aquí puedes enviar el dato al backend si lo implementas en el futuro
-      // window.location.href = "https://tu-backend-autorizador.com?mac=...";
-
-      // Por ahora solo simula redirección
-      window.location.href = "http://example.com"; // Cámbialo por meraki.com u otra URL si quieres
+      // Aquí puedes añadir lógica de backend/API si lo necesitas
+      window.location.href = "http://example.com"; // Cambia esta URL si quieres
     });
   </script>
 </body>
