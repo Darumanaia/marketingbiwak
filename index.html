@@ -85,7 +85,17 @@
     <p>Antes de acceder al WiFi, por favor introduce tu <strong>código postal</strong> y acepta nuestra política de privacidad.</p>
 
     <form id="formulario">
-      <input type="text" id="codigoPostal" name="codigoPostal" placeholder="Código Postal" required />
+     <input
+  type="number"
+  id="codigoPostal"
+  name="codigoPostal"
+  placeholder="Código Postal"
+  required
+  min="1000"
+  max="99999"
+  oninput="if(this.value.length > 5) this.value = this.value.slice(0,5);"
+/>
+
 
       <div class="checkbox-container">
         <input type="checkbox" id="aceptarPolitica" required />
