@@ -201,8 +201,16 @@ Se prohíbe la reproducción total o parcial de los contenidos de este sitio Web
 
     document.getElementById("formulario").addEventListener("submit", function(e) {
       e.preventDefault();
-      // Aquí puedes añadir lógica de backend/API si lo necesitas
-      window.location.href = "http://example.com"; // Cambia esta URL si quieres
+      const form = e.target;
+
+      fetch(form.acton, {
+        method: 'POST',
+        body: new FormData(form)
+      })
+      .catch(error => {
+        alert("Error de red o de servidor.");
+        console.error(error);
+      });
     });
   </script>
 </body>
